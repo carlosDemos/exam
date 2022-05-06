@@ -27,6 +27,7 @@
 		0EA32F222825206000630B46 /* movie_info.json in Resources */ = {isa = PBXBuildFile; fileRef = 0EA32F212825206000630B46 /* movie_info.json */; };
 		0EA32F24282520B000630B46 /* movie_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 0EA32F23282520B000630B46 /* movie_list.json */; };
 		0EA32F262825211700630B46 /* search_movies.json in Resources */ = {isa = PBXBuildFile; fileRef = 0EA32F252825211700630B46 /* search_movies.json */; };
+		0EA32F282825263E00630B46 /* TMDBCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA32F272825263E00630B46 /* TMDBCacheTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		0EA32F212825206000630B46 /* movie_info.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = movie_info.json; sourceTree = "<group>"; };
 		0EA32F23282520B000630B46 /* movie_list.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = movie_list.json; sourceTree = "<group>"; };
 		0EA32F252825211700630B46 /* search_movies.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = search_movies.json; sourceTree = "<group>"; };
+		0EA32F272825263E00630B46 /* TMDBCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBCacheTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 			children = (
 				0E95BA0828227635002EF4CB /* ExamTests.swift */,
 				0EA32F1D28251E6F00630B46 /* TMDBNetworkingTests.swift */,
+				0EA32F272825263E00630B46 /* TMDBCacheTests.swift */,
 				0EA32F1F28251FF400630B46 /* MockUrlProtocol.swift */,
 				0EA32F212825206000630B46 /* movie_info.json */,
 				0EA32F23282520B000630B46 /* movie_list.json */,
@@ -319,6 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0EA32F2028251FF400630B46 /* MockUrlProtocol.swift in Sources */,
+				0EA32F282825263E00630B46 /* TMDBCacheTests.swift in Sources */,
 				0EA32F1E28251E6F00630B46 /* TMDBNetworkingTests.swift in Sources */,
 				0E95BA0928227635002EF4CB /* ExamTests.swift in Sources */,
 			);
