@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TMDBService: TMDBServiceProtocol {
+class TMDBNetworkingService: TMDBNetworkingServiceProtocol {
 
     private let apiKey = "1998bfbd5a042c8835abedd2ca3106d4"
     private let baseAPIURL = "https://api.themoviedb.org/3"
@@ -19,6 +19,8 @@ class TMDBService: TMDBServiceProtocol {
         self.urlSession = urlSession
         self.cache = cache
     }
+    
+    // TODO: create another func called fetch initial movies to fetch all the endpoint movies and append them to a dictionary
     
     func getMovies(from endPoint: TMDBServiceEndPoints, completion: @escaping (Result<MovieApiResponse, TMDBServiceError>) -> Void) {
         guard let safeURL = URL(string: "\(baseAPIURL)/movie/\(endPoint.rawValue)") else {

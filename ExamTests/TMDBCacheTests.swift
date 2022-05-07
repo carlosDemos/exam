@@ -9,19 +9,21 @@ import XCTest
 @testable import Exam
 
 class TMDBCacheTests: XCTestCase {
-
-    // TODO: create a proper sut with setups and teardowns
-    
+        
     func testTMDBfetchMovie_whenGivenRequestWasInCache_NoRequestShouldBeMade() {
-                
+        
+        // create session
         let urlSessionConfiguration = URLSessionConfiguration.ephemeral
         urlSessionConfiguration.protocolClasses = [MockURLProtocol.self]
         let session = URLSession(configuration: urlSessionConfiguration)
-        let bundle = Bundle(for: TMDBNetworkingTests.self)
+        
+        // create data to inject
+        let bundle = Bundle(for: TMDBNetworkingServiceTests.self)
         let url = bundle.url(forResource: "movie_info", withExtension: "json")
         let data = try! Data(contentsOf: url!)
         let decodedData = try! TMDBUtilities.jsonDecoder.decode(Movie.self, from: data)
-        let cache = MyCache()
+        
+        // create url that would be the key to our cache
         let apiKey = "1998bfbd5a042c8835abedd2ca3106d4"
         let baseAPIURL = "https://api.themoviedb.org/3"
         let fetchUrl = URL(string: "\(baseAPIURL)/movie/\(338762)")!
@@ -30,12 +32,16 @@ class TMDBCacheTests: XCTestCase {
         queryItems.append(contentsOf: params.map {URLQueryItem(name: $0.key, value: $0.value)})
         var urlComponents = URLComponents(url: fetchUrl, resolvingAgainstBaseURL: false)!
         urlComponents.queryItems  = queryItems
-
+        
+        // create the cache and set its key and value
+        let cache = MyCache()
         cache.setObject(decodedData as AnyObject, forKey: urlComponents.url!.absoluteString as AnyObject)
         
-        let sut = TMDBService(urlSession: session, cache: cache)
-        let expectation = self.expectation(description: "TMDBService response expectation")
+        // create the sut and inject its data
+        let sut = TMDBNetworkingService(urlSession: session, cache: cache)
+        let expectation = self.expectation(description: "TMDBNetworkingService response expectation")
         
+        // test
         sut.fetchMovie(id: 338762) { result in
             switch result {
             case .success(let movie):

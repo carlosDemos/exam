@@ -1,5 +1,5 @@
 //
-//  TMDBNetworkingTests.swift
+//  TMDBNetworkingServiceTests.swift
 //  ExamTests
 //
 //  Created by Carlos Caraccia on 06/05/2022.
@@ -8,9 +8,9 @@
 import XCTest
 @testable import Exam
 
-class TMDBNetworkingTests: XCTestCase {
+class TMDBNetworkingServiceTests: XCTestCase {
     
-    var sut:TMDBService!
+    var sut:TMDBNetworkingService!
     var movieFetchedData:Data!
     var searchedMoviesData:Data!
     var initiallyFetchedMoviesData:Data!
@@ -21,9 +21,9 @@ class TMDBNetworkingTests: XCTestCase {
         urlSessionConfiguration.protocolClasses = [MockURLProtocol.self]
         let session = URLSession(configuration: urlSessionConfiguration)
         
-        sut = TMDBService(urlSession: session)
+        sut = TMDBNetworkingService(urlSession: session)
         
-        let bundle = Bundle(for: TMDBNetworkingTests.self)
+        let bundle = Bundle(for: TMDBNetworkingServiceTests.self)
         let movieInfoUrl = bundle.url(forResource: "movie_info", withExtension: "json")
         let searchedMoviesUrl = bundle.url(forResource: "search_movies", withExtension: "json")
         let initiallyFetchedMoviesUrl = bundle.url(forResource: "movie_list", withExtension: "json")
@@ -47,7 +47,7 @@ class TMDBNetworkingTests: XCTestCase {
         let corruptedData = "{\"path\" : \"incorrect\"}".data(using: .utf8)
         MockURLProtocol.stubResponseData = corruptedData
         MockURLProtocol.stubURLResponse = stubResponse
-        let expectation = self.expectation(description: "TMDBService response expectation")
+        let expectation = self.expectation(description: "TMDBNetworkingService response expectation")
         
         sut.fetchMovie(id: 338762) { result in
             switch result {
@@ -66,7 +66,7 @@ class TMDBNetworkingTests: XCTestCase {
         
         let stubResponse = HTTPURLResponse(url: URL(string: "aaa")!, statusCode: 410, httpVersion: nil, headerFields: nil)
         MockURLProtocol.stubURLResponse = stubResponse
-        let expectation = self.expectation(description: "TMDBService response expectation")
+        let expectation = self.expectation(description: "TMDBNetworkingService response expectation")
         
         sut.fetchMovie(id: 338762) { result in
             switch result {
@@ -87,7 +87,7 @@ class TMDBNetworkingTests: XCTestCase {
         MockURLProtocol.stubURLResponse = stubResponse
         MockURLProtocol.stubResponseData = movieFetchedData
         
-        let expectation = self.expectation(description: "TMDBService response expectation")
+        let expectation = self.expectation(description: "TMDBNetworkingService response expectation")
         
         sut.fetchMovie(id: 338762) { result in
             switch result {
