@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    
+jobs:
+  build:
+    runs-on: macOS-latest
+    steps:
+      - name: Test
+        uses: actions/checkout@v3
+      - name: Check Xcode
+        run:  ls /Applications | grep Xcode
+      - name: Force Xcode
+        run:  sudo xcode-select -switch /Applications/Xcode_13.2.1.app
+      - name: Install simulator
+        run:  xcversion simulators --install='iOS 15.0'
+      - name: Prepare iOS 15.0 simulator
+        run: |
+          sudo mkdir -p /Library/Developer/CoreSimulator/Profiles/Runtimes
+          sudo ln -s /Applications/Xcode_13.2.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS.simruntime /Library/Developer/CoreSimulator/Profiles/Runtimes/iOS\ 15.0.simruntime
+          xcrun simctl list runtimes
+          xcrun simctl create iPhone_11 "iPhone 11" "com.apple.CoreSimulator.SimRuntime.iOS-15-0"
+          xcrun simctl list devices 15.0
+      - name: Show Build SDK
+        run:  xcodebuild -project Exam.xcodeproj -scheme Exam -showsdks
+      - name: Show availlable destinations
+        run:  xcodebuild -project Exam.xcodeproj -scheme Exam -showdestinations
+      - name: Clean Build and Test
+        run:  xcodebuild clean test -project Exam.xcodeproj -scheme Exam -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.0' | xcpretty && exit ${PIPESTATUS[0]}

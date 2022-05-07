@@ -12,8 +12,8 @@ struct Movie:Decodable {
     let title:String
     let backdropPath:String?
     let posterPath:String
-    let overView:String
-    let voteAvg:Double
+    let overview:String
+    let voteAverage:Double
     let voteCount:Int
     let runtime:Int?
 }
