@@ -21,7 +21,7 @@ jobs:
         with:
           model: 'iPhone 11'
           os: 'iOS'
-          os_version: '15.0'
+          os_version: '15.0.2'
       - name: Show Build SDK
         run:  xcodebuild -project Exam.xcodeproj -scheme Exam -showsdks
       - name: Show availlable destinations
