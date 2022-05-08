@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class TMDBInitialInitialMoviesCell:UICollectionViewCell,
+class TMDBInitialMoviesCell:UICollectionViewCell,
                                    UICollectionViewDataSource,
                                    UICollectionViewDelegate,
                                    UICollectionViewDelegateFlowLayout
