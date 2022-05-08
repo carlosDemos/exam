@@ -14,12 +14,12 @@ class TMDBInitialMoviesController:UICollectionViewController,
     private let movieCellId = "movieCellId"
     
     override func viewDidLoad() {
-        collectionView.backgroundColor = .green
-        collectionView.register(MovieCell.self, forCellWithReuseIdentifier: movieCellId)
+        collectionView.backgroundColor = .white
+        collectionView.register(TMDBInitialInitialMoviesCell.self, forCellWithReuseIdentifier: movieCellId)
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: movieCellId, for: indexPath) as! MovieCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: movieCellId, for: indexPath) as! TMDBInitialInitialMoviesCell
         return cell
     }
     
@@ -28,24 +28,8 @@ class TMDBInitialMoviesController:UICollectionViewController,
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.width, height: 150)
+        return CGSize(width: self.view.frame.width, height: 250)
     }
     
 }
 
-class MovieCell:UICollectionViewCell {
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.setupViews()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init not implemented")
-    }
-    
-    
-    func setupViews() {
-        backgroundColor = .blue
-    }
-}
