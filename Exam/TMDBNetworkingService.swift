@@ -14,15 +14,46 @@ class TMDBNetworkingService: TMDBNetworkingServiceProtocol {
     private var urlSession:URLSession
     private var jsonDecoder = TMDBUtilities.jsonDecoder
     private var cache:MyCache
+    
+    private var initialMoviesDictionary = [TMDBServiceEndPoints:[Movie]]()
 
     init(urlSession:URLSession = .shared, cache:MyCache = .sharedInstance) {
         self.urlSession = urlSession
         self.cache = cache
     }
     
-    // TODO: create another func called fetch initial movies to fetch all the endpoint movies and append them to a dictionary
+    func getInitialMovies(completion: @escaping(Result<[TMDBServiceEndPoints:[Movie]], TMDBServiceError>) -> Void) {
+        getMovies(from: .popular) { popularMoviesResult in
+            switch popularMoviesResult {
+            case .success(let popularMovies):
+                self.initialMoviesDictionary.updateValue(popularMovies.results,
+                                                         forKey: .popular)
+                self.getMovies(from: .topRated) {topRatedMoviesResult in
+                    switch topRatedMoviesResult {
+                    case .success(let topRatedMovies):
+                        self.initialMoviesDictionary.updateValue(topRatedMovies.results,
+                                                                 forKey: .topRated)
+                        self.getMovies(from: .upcoming) { upCommingMoviesResult in
+                            switch upCommingMoviesResult {
+                            case .success(let upCommingMovies):
+                                self.initialMoviesDictionary.updateValue(upCommingMovies.results,
+                                                                    forKey:.upcoming)
+                                completion(.success(self.initialMoviesDictionary))
+                            case .failure(let upcommingMoviesError):
+                                completion(.failure(upcommingMoviesError))
+                            }
+                        }
+                    case .failure(let topRatedMoviesError):
+                        completion(.failure(topRatedMoviesError))
+                    }
+                }
+            case .failure(let popularMoviesError):
+                completion(.failure(popularMoviesError))
+            }
+        }
+    }
     
-    func getMovies(from endPoint: TMDBServiceEndPoints, completion: @escaping (Result<MovieApiResponse, TMDBServiceError>) -> Void) {
+    private func getMovies(from endPoint: TMDBServiceEndPoints, completion: @escaping (Result<MovieApiResponse, TMDBServiceError>) -> Void) {
         guard let safeURL = URL(string: "\(baseAPIURL)/movie/\(endPoint.rawValue)") else {
             completion(.failure(.incorrectEndPoint))
             return
@@ -101,9 +132,7 @@ class TMDBNetworkingService: TMDBNetworkingServiceProtocol {
                 if composedURL.absoluteString.contains("query") {
                     self.cache.setObject(decodedData as AnyObject, forKey:composedURL.absoluteString as AnyObject)
                 }
-                
                 self.dispatchResultToMainThread(with: .success(decodedData), completion: completion)
-                
             } catch {
                 self.dispatchResultToMainThread(with: .failure(.invalidData), completion: completion)
             }

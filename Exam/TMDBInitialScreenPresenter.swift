@@ -18,15 +18,14 @@ class TMDBInitialScreenPresenter {
         self.delegate = delegate
     }
     
-    func getMovies(from endPoint:TMDBServiceEndPoints) {
-        webService.getMovies(from: endPoint) { [weak self] result in
+    func getInitialMovies() {
+        webService.getInitialMovies { result in
             switch result {
-            case .success(let movies):
-                self?.delegate?.successfulGetInitialImages()
-            case .failure(let error):
-                self?.delegate?.errorHandler(error: error)
+            case .success(let moviesDictionary):
+                self.delegate?.successfulGetInitialMovies(moviesDictionary: moviesDictionary)
+            case .failure(let serviceError):
+                self.delegate?.errorHandler(error: serviceError)
             }
         }
     }
-    
 }

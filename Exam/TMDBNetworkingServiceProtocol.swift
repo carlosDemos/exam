@@ -9,7 +9,7 @@ import Foundation
 
 protocol TMDBNetworkingServiceProtocol {
     
-    func getMovies(from endPoint:TMDBServiceEndPoints, completion: @escaping (Result<MovieApiResponse, TMDBServiceError>) -> Void)
+    func getInitialMovies(completion: @escaping(Result<[TMDBServiceEndPoints:[Movie]], TMDBServiceError>) -> Void)
     func fetchMovie(id:Int, completion:@escaping(Result<Movie, TMDBServiceError>) -> Void)
     func searchMovie(query: String, completion: @escaping (Result<MovieApiResponse, TMDBServiceError>) -> Void)
     

@@ -10,12 +10,13 @@ import Foundation
 
 class MockTMDBNetworkingService:TMDBNetworkingServiceProtocol {
     
-    var isGetMoviesCalled:Bool = false
+    var isGetInitialMoviesCalled:Bool = false
     var isFetchMovieCalled:Bool = false
     var isSearchMovieCalled:Bool = false
     
-    func getMovies(from endPoint: TMDBServiceEndPoints, completion: @escaping (Result<MovieApiResponse, TMDBServiceError>) -> Void) {
-        isGetMoviesCalled = true
+    func getInitialMovies(completion: @escaping (Result<[TMDBServiceEndPoints : [Movie]], TMDBServiceError>) -> Void) {
+        
+        isGetInitialMoviesCalled = true
 
         let movie = Movie(id: 1,
                           title: "a title",
@@ -26,10 +27,12 @@ class MockTMDBNetworkingService:TMDBNetworkingServiceProtocol {
                           voteCount: 1,
                           runtime: 1)
         
-        let movieApiResponse = MovieApiResponse(result: [movie])
-        
-        let resultOfRequest = Result<MovieApiResponse, TMDBServiceError>.success(movieApiResponse)
-        completion(resultOfRequest)
+        let dict:[TMDBServiceEndPoints:[Movie]] = [.popular:[movie],
+                                                   .topRated:[movie],
+                                                   .upcoming:[movie]]
+            
+        let resutlt = Result<[TMDBServiceEndPoints : [Movie]], TMDBServiceError>.success(dict)
+        completion(resutlt)
     }
     
     func fetchMovie(id: Int, completion: @escaping (Result<Movie, TMDBServiceError>) -> Void) {

@@ -1,4 +1,5 @@
-name: CI2
+name: Build, lint and test
+
 
 on:
   push:

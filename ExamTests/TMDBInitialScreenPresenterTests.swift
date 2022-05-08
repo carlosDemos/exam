@@ -13,7 +13,6 @@ class TMDBInitialScreenPresenterTests: XCTestCase {
     func testTMDBPresenter_WhenGivenAnEndPoint_ShouldCallGetMoviesMethodOnNetworkingClass() {
         
         // arrange
-        
         let mockTMDBPNetworkingService = MockTMDBNetworkingService()
         let mockInitialScreenViewDelegate = MockInitialScreenViewDelegate()
         
@@ -21,12 +20,10 @@ class TMDBInitialScreenPresenterTests: XCTestCase {
                                              delegate: mockInitialScreenViewDelegate)
         
         // act
-        
-        sut.getMovies(from: .popular)
+        sut.getInitialMovies()
         
         // asert
-        
-        XCTAssertTrue(mockTMDBPNetworkingService.isGetMoviesCalled,
+        XCTAssertTrue(mockTMDBPNetworkingService.isGetInitialMoviesCalled,
                       "TMDBNetworkingService isGetMoviesCalled should be true but it was not.")
         XCTAssertFalse(mockTMDBPNetworkingService.isFetchMovieCalled,
                        "TMDBNetworkingService isFetchMovieCalled should be true but it was not.")
@@ -47,10 +44,10 @@ class TMDBInitialScreenPresenterTests: XCTestCase {
         let sut = TMDBInitialScreenPresenter(webService: mockTMDBNetworkingService,
                                              delegate: mockInitialScreenViewDelegate)
         
-        sut.getMovies(from: .popular)
+        sut.getInitialMovies()
         
         // assert
-        self.wait(for: [successfullGetMoviesExpectation], timeout: 5.0)
+        self.wait(for: [successfullGetMoviesExpectation], timeout: 1.0)
 
         
     }

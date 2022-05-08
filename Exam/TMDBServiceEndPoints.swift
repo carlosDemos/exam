@@ -8,9 +8,9 @@
 import Foundation
 
 
-enum TMDBServiceEndPoints:String {
+enum TMDBServiceEndPoints:String, CaseIterable {
     
-    case upcomming
+    case upcoming
     case popular
     case topRated = "top_rated"
     
@@ -19,7 +19,7 @@ enum TMDBServiceEndPoints:String {
         switch self {
             case .popular: return "Popular"
             case .topRated: return "Top Rated"
-            case .upcomming: return "Upcomming"
+            case .upcoming: return "Upcoming"
         }
     }
 }
