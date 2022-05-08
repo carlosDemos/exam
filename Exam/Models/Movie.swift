@@ -8,10 +8,10 @@
 import Foundation
 
 struct Movie:Decodable {
-    let id:Int?
+    let id:Int
     let title:String
     let backdropPath:String?
-    let posterPath:String
+    let posterPath:String?
     let overview:String
     let voteAverage:Double
     let voteCount:Int

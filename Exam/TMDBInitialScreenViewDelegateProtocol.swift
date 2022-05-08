@@ -9,9 +9,7 @@ import Foundation
 
 protocol TMDBInitialScreenViewDelegateProtocol:AnyObject {
     
-    // TODO: pass a parameter to successfulGetInitialImages named movies with the api response from the movies
-    
-    func successfulGetInitialImages()
+    func successfulGetInitialMovies(moviesDictionary:[TMDBServiceEndPoints:[Movie]])
     func errorHandler(error:TMDBServiceError)
     
 }

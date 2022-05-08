@@ -13,7 +13,7 @@ class MockInitialScreenViewDelegate:TMDBInitialScreenViewDelegateProtocol {
     
     var expectation:XCTestExpectation?
     
-    func successfulGetInitialImages() {
+    func successfulGetInitialMovies(moviesDictionary: [TMDBServiceEndPoints : [Movie]]) {
         expectation?.fulfill()
     }
     
