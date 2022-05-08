@@ -1,5 +1,5 @@
 //
-//  TMDBInitialMovieCell.swift
+//  TMDBMovieCell.swift
 //  Exam
 //
 //  Created by Carlos Caraccia on 08/05/2022.
@@ -7,7 +7,16 @@
 
 import UIKit
 
-class MovieCell:UICollectionViewCell {
+class TMDBMovieCell:UICollectionViewCell {
+    
+    var movie:Movie? {
+        didSet {
+            movieTitleLabel.text = movie?.title
+            if let movieImageUrl = movie?.backDropUrl {
+                movieImage.loadImage(with: movieImageUrl)
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -18,8 +27,8 @@ class MovieCell:UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    lazy var movieImage:UIImageView = {
-        let iv = UIImageView()
+    lazy var movieImage:ImageLoader = {
+        let iv = ImageLoader()
         iv.image = UIImage(named: "fakeImage")
         iv.contentMode = .scaleAspectFill
         iv.layer.cornerRadius = 16
@@ -31,6 +40,8 @@ class MovieCell:UICollectionViewCell {
     lazy var movieTitleLabel:UILabel = {
         let label = UILabel()
         label.text = "The adam project"
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         label.font = .systemFont(ofSize: 12, weight: .semibold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -51,7 +62,8 @@ class MovieCell:UICollectionViewCell {
         
         NSLayoutConstraint.activate([
            movieTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 4),
-           movieTitleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+           movieTitleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 8),
+           movieTitleLabel.widthAnchor.constraint(equalTo: self.widthAnchor)
         ])
 
     }

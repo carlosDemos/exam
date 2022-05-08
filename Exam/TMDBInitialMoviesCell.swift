@@ -9,11 +9,17 @@ import Foundation
 import UIKit
 
 class TMDBInitialMoviesCell:UICollectionViewCell,
-                                   UICollectionViewDataSource,
-                                   UICollectionViewDelegate,
-                                   UICollectionViewDelegateFlowLayout
+                            UICollectionViewDataSource,
+                            UICollectionViewDelegate,
+                            UICollectionViewDelegateFlowLayout
 {
     private let movieCellIdentifier = "movieCell"
+    
+    var movies:[Movie]? {
+        didSet {
+            self.moviesCollectionView.reloadData()
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,7 +44,7 @@ class TMDBInitialMoviesCell:UICollectionViewCell,
         moviesCollectionView.dataSource = self
         moviesCollectionView.delegate = self
         
-        moviesCollectionView.register(MovieCell.self, forCellWithReuseIdentifier:movieCellIdentifier)
+        moviesCollectionView.register(TMDBMovieCell.self, forCellWithReuseIdentifier:movieCellIdentifier)
                 
         addSubview(moviesCollectionView)
         
@@ -51,15 +57,20 @@ class TMDBInitialMoviesCell:UICollectionViewCell,
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if let safeMovies = self.movies {
+            return safeMovies.count
+        }
         return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: movieCellIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: movieCellIdentifier, for: indexPath) as! TMDBMovieCell
+        cell.movie = movies?[indexPath.row]
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // TODO: resize the collection view so the images can fit properly
         return CGSize(width: 150, height: moviesCollectionView.frame.height)
     }
     
