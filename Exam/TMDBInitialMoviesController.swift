@@ -15,11 +15,11 @@ class TMDBInitialMoviesController:UICollectionViewController,
     
     override func viewDidLoad() {
         collectionView.backgroundColor = .white
-        collectionView.register(TMDBInitialInitialMoviesCell.self, forCellWithReuseIdentifier: movieCellId)
+        collectionView.register(TMDBInitialMoviesCell.self, forCellWithReuseIdentifier: movieCellId)
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: movieCellId, for: indexPath) as! TMDBInitialInitialMoviesCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: movieCellId, for: indexPath) as! TMDBInitialMoviesCell
         return cell
     }
     
