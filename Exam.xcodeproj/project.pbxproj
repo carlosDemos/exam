@@ -181,6 +181,44 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
+		0E0B1FE7282966630035B3F4 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				0E24491C282875BC006B0271 /* TMDBCoordinator.swift */,
+				0E24491E282876A3006B0271 /* TMDBMainCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		0E0B1FE82829666F0035B3F4 /* DetailedScreen */ = {
+			isa = PBXGroup;
+			children = (
+				0E95B9F528227634002EF4CB /* TMDBDetailedMovieScreen.swift */,
+				0E0B1FE528294A600035B3F4 /* TMDBDetailedMovieScreenPresenter.swift */,
+			);
+			path = DetailedScreen;
+			sourceTree = "<group>";
+		};
+		0E0B1FE9282966870035B3F4 /* FakeResponses */ = {
+			isa = PBXGroup;
+			children = (
+				0EA32F212825206000630B46 /* movie_info.json */,
+				0EA32F23282520B000630B46 /* movie_list.json */,
+				0EA32F252825211700630B46 /* search_movies.json */,
+			);
+			path = FakeResponses;
+			sourceTree = "<group>";
+		};
+		0E0B1FEA282966A10035B3F4 /* MockObjects */ = {
+			isa = PBXGroup;
+			children = (
+				0EA32F1F28251FF400630B46 /* MockUrlProtocol.swift */,
+				0EB24CF82826B6ED00BF60E6 /* MockTMDBNetworkingService.swift */,
+				0EB24CFC2826C9A600BF60E6 /* MockInitialScreenViewDelegate.swift */,
+			);
+			path = MockObjects;
+			sourceTree = "<group>";
+		};
 		0E95B9E528227634002EF4CB = {
 			isa = PBXGroup;
 			children = (
@@ -206,10 +244,8 @@
 			children = (
 				0E95B9F128227634002EF4CB /* AppDelegate.swift */,
 				0E95B9F328227634002EF4CB /* SceneDelegate.swift */,
-				0E95B9F528227634002EF4CB /* TMDBDetailedMovieScreen.swift */,
-				0E0B1FE528294A600035B3F4 /* TMDBDetailedMovieScreenPresenter.swift */,
-				0E24491C282875BC006B0271 /* TMDBCoordinator.swift */,
-				0E24491E282876A3006B0271 /* TMDBMainCoordinator.swift */,
+				0E0B1FE82829666F0035B3F4 /* DetailedScreen */,
+				0E0B1FE7282966630035B3F4 /* Coordinator */,
 				0E0B1FE1282948970035B3F4 /* InitialScreen */,
 				0E0B1FDF2829480F0035B3F4 /* Networking */,
 				0E0B1FE0282948750035B3F4 /* Utilities */,
@@ -225,14 +261,10 @@
 			isa = PBXGroup;
 			children = (
 				0EA32F1D28251E6F00630B46 /* TMDBNetworkingServiceTests.swift */,
-				0EA32F272825263E00630B46 /* TMDBCacheTests.swift */,
-				0EA32F1F28251FF400630B46 /* MockUrlProtocol.swift */,
-				0EB24CF82826B6ED00BF60E6 /* MockTMDBNetworkingService.swift */,
 				0EB24CF62826B62E00BF60E6 /* TMDBInitialScreenPresenterTests.swift */,
-				0EB24CFC2826C9A600BF60E6 /* MockInitialScreenViewDelegate.swift */,
-				0EA32F212825206000630B46 /* movie_info.json */,
-				0EA32F23282520B000630B46 /* movie_list.json */,
-				0EA32F252825211700630B46 /* search_movies.json */,
+				0EA32F272825263E00630B46 /* TMDBCacheTests.swift */,
+				0E0B1FEA282966A10035B3F4 /* MockObjects */,
+				0E0B1FE9282966870035B3F4 /* FakeResponses */,
 			);
 			path = ExamTests;
 			sourceTree = "<group>";
