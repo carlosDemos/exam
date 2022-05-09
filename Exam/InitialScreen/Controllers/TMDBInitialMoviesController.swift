@@ -9,14 +9,9 @@ import Foundation
 import UIKit
 
 class TMDBInitialMoviesController:UICollectionViewController,
-                                  UICollectionViewDelegateFlowLayout,
-                                  TMDBInitialMoviesCellProtocol
+                                  UICollectionViewDelegateFlowLayout
 {
-    func navigateToDetailMovies(movie: Movie) {
-        delegate?.showDetailedMovieScreen(with: movie)
-    }
-    
-    weak var delegate:MainCoordinator?
+    weak var delegate:TMDBMainCoordinator?
         
     private let movieCellId = "movieCellId"
     private let sectionHeaderId = "sectionHeaderId"
@@ -41,7 +36,7 @@ class TMDBInitialMoviesController:UICollectionViewController,
         
         collectionView.backgroundColor = .white
         collectionView.register(TMDBInitialMoviesCell.self, forCellWithReuseIdentifier: movieCellId)
-        collectionView.register(SectionHeaderTitle.self,
+        collectionView.register(TMDBInitialScreenSectionHeaderTitle.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: sectionHeaderId)
     }
@@ -70,7 +65,7 @@ class TMDBInitialMoviesController:UICollectionViewController,
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let sectionHeaderTitle = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: sectionHeaderId, for: indexPath) as! SectionHeaderTitle
+        let sectionHeaderTitle = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: sectionHeaderId, for: indexPath) as! TMDBInitialScreenSectionHeaderTitle
         let keys = Array(moviesDictionary.keys)
         sectionHeaderTitle.sectionTitleLabel.text = keys.count == 0 ? "Section title" :
                                                                         keys[indexPath.section].description
@@ -90,6 +85,13 @@ extension TMDBInitialMoviesController: TMDBInitialScreenViewDelegateProtocol {
     
     func errorHandler(error: TMDBServiceError) {
         // TODO: Handle error
+    }
+}
+
+extension TMDBInitialMoviesController:TMDBInitialMoviesCellProtocol {
+    
+    func navigateToDetailMovies(movie: Movie) {
+        delegate?.showDetailedMovieScreen(with: movie)
     }
 }
 

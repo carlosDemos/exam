@@ -10,7 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var mainCoordinator: MainCoordinator?
+    var mainCoordinator: TMDBMainCoordinator?
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         let navigationController = UINavigationController()
-        mainCoordinator = MainCoordinator(navigationController: navigationController)
+        mainCoordinator = TMDBMainCoordinator(navigationController: navigationController)
         mainCoordinator?.start()
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
