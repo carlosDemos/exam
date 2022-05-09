@@ -40,7 +40,6 @@ class TMDBDetailedMovieScreen: UIViewController  {
     
     lazy var movieImage:TMDBImageLoader = {
         let iv = TMDBImageLoader()
-        iv.image = UIImage(named: "fakeImage")
         iv.contentMode = .scaleAspectFill
         iv.layer.cornerRadius = 16
         iv.layer.masksToBounds = true
