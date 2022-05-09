@@ -28,8 +28,8 @@ class TMDBMovieCell:UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    lazy var movieImage:ImageLoader = {
-        let iv = ImageLoader()
+    lazy var movieImage:TMDBImageLoader = {
+        let iv = TMDBImageLoader()
         iv.image = UIImage(named: "fakeImage")
         iv.contentMode = .scaleAspectFill
         iv.layer.cornerRadius = 16

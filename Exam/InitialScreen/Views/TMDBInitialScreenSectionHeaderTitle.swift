@@ -1,5 +1,5 @@
 //
-//  SectionHeaderTile.swift
+//  TMDBInitialScreenSectionHeaderTitle.swift
 //  Exam
 //
 //  Created by Carlos Caraccia on 08/05/2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SectionHeaderTitle:UICollectionReusableView {
+class TMDBInitialScreenSectionHeaderTitle:UICollectionReusableView {
     
     var sectionTitleLabel:UILabel = {
         let label = UILabel()

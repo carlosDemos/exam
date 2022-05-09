@@ -1,5 +1,5 @@
 //
-//  MainCoordinator.swift
+//  TMDBMainCoordinator.swift
 //  Exam
 //
 //  Created by Carlos Caraccia on 08/05/2022.
@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-class MainCoordinator:Coordinator  {
+class TMDBMainCoordinator:TMDBCoordinator  {
     
-    var childCoordinators: [Coordinator] = [Coordinator]()
+    var childCoordinators: [TMDBCoordinator] = [TMDBCoordinator]()
     
     var navigationController: UINavigationController
     
@@ -26,7 +26,7 @@ class MainCoordinator:Coordinator  {
     }
     
     func showDetailedMovieScreen(with movie:Movie) {
-        let movieDetailsViewController = DetailedScreenViewController()
+        let movieDetailsViewController = TMDBDetailedMovieScreen(movieId: movie.id)
         movieDetailsViewController.delegate = self
         self.navigationController.pushViewController(movieDetailsViewController, animated: true)
     }

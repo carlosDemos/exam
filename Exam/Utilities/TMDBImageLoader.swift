@@ -1,5 +1,5 @@
 //
-//  ImageLoader.swift
+//  TMDBImageLoader.swift
 //  Exam
 //
 //  Created by Carlos Caraccia on 08/05/2022.
@@ -9,7 +9,7 @@ import UIKit
 
  let _imageCache = NSCache<AnyObject, AnyObject>()
 
-class ImageLoader:UIImageView {
+class TMDBImageLoader:UIImageView {
     
     var imageURL:URL?
     var isLoading = false
