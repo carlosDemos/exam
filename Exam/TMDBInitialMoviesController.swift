@@ -9,8 +9,15 @@ import Foundation
 import UIKit
 
 class TMDBInitialMoviesController:UICollectionViewController,
-                                  UICollectionViewDelegateFlowLayout {
+                                  UICollectionViewDelegateFlowLayout,
+                                  TMDBInitialMoviesCellProtocol
+{
+    func navigateToDetailMovies(movie: Movie) {
+        delegate?.showDetailedMovieScreen(with: movie)
+    }
     
+    weak var delegate:MainCoordinator?
+        
     private let movieCellId = "movieCellId"
     private let sectionHeaderId = "sectionHeaderId"
     
@@ -44,9 +51,10 @@ class TMDBInitialMoviesController:UICollectionViewController,
         let key = Array(moviesDictionary.keys)[indexPath.section]
         let movies = moviesDictionary[key]
         cell.movies = movies
+        cell.delegate = self
         return cell
     }
-    
+        
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         let keys = Array(moviesDictionary.keys)
         return keys.count

@@ -19,6 +19,10 @@ struct Movie:Decodable {
     let runtime:Int?
     
     var backDropUrl:URL {
-        return URL(string:"https://image.tmdb.org/t/p/w500\(backdropPath ?? "")")!
+        return URL(string:"https://image.tmdb.org/t/p/w780\(backdropPath ?? "")")!
+    }
+    
+    var posterPathURL:URL {
+        return URL(string:"https://image.tmdb.org/t/p/w185\(posterPath ?? "")")!
     }
 }

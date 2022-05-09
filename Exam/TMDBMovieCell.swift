@@ -12,9 +12,10 @@ class TMDBMovieCell:UICollectionViewCell {
     var movie:Movie? {
         didSet {
             movieTitleLabel.text = movie?.title
-            if let movieImageUrl = movie?.backDropUrl {
+            if let movieImageUrl = movie?.posterPathURL {
                 movieImage.loadImage(with: movieImageUrl)
             }
+            // TODO: add an alternative case in here to show a gray image
         }
     }
     

@@ -8,12 +8,20 @@
 import Foundation
 import UIKit
 
+protocol TMDBInitialMoviesCellProtocol:AnyObject {
+    func navigateToDetailMovies(movie:Movie)
+}
+
 class TMDBInitialMoviesCell:UICollectionViewCell,
                             UICollectionViewDataSource,
                             UICollectionViewDelegate,
                             UICollectionViewDelegateFlowLayout
 {
+    
     private let movieCellIdentifier = "movieCell"
+  
+    // the cell(view) should not handle the responsibility of naviagation or communicating with the coordinator, this should be done in the controller class
+    weak var delegate:TMDBInitialMoviesCellProtocol?
     
     var movies:[Movie]? {
         didSet {
@@ -30,7 +38,7 @@ class TMDBInitialMoviesCell:UICollectionViewCell,
         fatalError("init(coder:) has not been implemented")
     }
     
-    let moviesCollectionView:UICollectionView = {
+    var moviesCollectionView:UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -67,6 +75,11 @@ class TMDBInitialMoviesCell:UICollectionViewCell,
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: movieCellIdentifier, for: indexPath) as! TMDBMovieCell
         cell.movie = movies?[indexPath.row]
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie = movies![indexPath.row]
+        delegate?.navigateToDetailMovies(movie: movie)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
