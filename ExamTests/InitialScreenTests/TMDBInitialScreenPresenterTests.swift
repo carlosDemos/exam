@@ -14,7 +14,7 @@ class TMDBInitialScreenPresenterTests: XCTestCase {
         
         // arrange
         let mockTMDBPNetworkingService = MockTMDBNetworkingService()
-        let mockInitialScreenViewDelegate = MockInitialScreenViewDelegate()
+        let mockInitialScreenViewDelegate = MockTMDBInitialScreenViewDelegate()
         
         let sut = TMDBInitialScreenPresenter(webService:mockTMDBPNetworkingService,
                                              delegate: mockInitialScreenViewDelegate)
@@ -35,7 +35,7 @@ class TMDBInitialScreenPresenterTests: XCTestCase {
         
         // arrange
         let successfullGetMoviesExpectation = expectation(description: "Expect a successful get movies method to be called")
-        let mockInitialScreenViewDelegate = MockInitialScreenViewDelegate()
+        let mockInitialScreenViewDelegate = MockTMDBInitialScreenViewDelegate()
         mockInitialScreenViewDelegate.expectation = successfullGetMoviesExpectation
         
         let mockTMDBNetworkingService = MockTMDBNetworkingService()

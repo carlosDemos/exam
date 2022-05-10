@@ -7,12 +7,12 @@
 
 import Foundation
 
-class TMDBInitialScreenPresenter {
+class TMDBInitialScreenPresenter: TMDBInitialScreenPresenterProtocol {
     
     private var webService:TMDBNetworkingServiceProtocol
     private weak var delegate:TMDBInitialScreenViewDelegateProtocol?
     
-    init(webService:TMDBNetworkingServiceProtocol,
+    required init(webService:TMDBNetworkingServiceProtocol,
          delegate:TMDBInitialScreenViewDelegateProtocol) {
         self.webService = webService
         self.delegate = delegate

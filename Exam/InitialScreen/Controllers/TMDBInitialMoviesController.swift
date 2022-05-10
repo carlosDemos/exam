@@ -12,15 +12,11 @@ class TMDBInitialMoviesController:UICollectionViewController,
                                   UICollectionViewDelegateFlowLayout
 {
     weak var delegate:TMDBMainCoordinator?
+    
+    var presenter:TMDBInitialScreenPresenterProtocol?
         
     private let movieCellId = "movieCellId"
     private let sectionHeaderId = "sectionHeaderId"
-    
-    lazy var sectionTitleLabel:UILabel = {
-        let label = UILabel()
-        label.text = "Section Name"
-        return label
-    }()
     
     private var moviesDictionary:[TMDBServiceEndPoints : [Movie]] = Dictionary() {
         didSet {
@@ -29,11 +25,14 @@ class TMDBInitialMoviesController:UICollectionViewController,
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         
-       let presenter = TMDBInitialScreenPresenter(webService: TMDBNetworkingService(),
-                                                  delegate: self)
-        presenter.getInitialMovies()
-        
+        if presenter == nil {
+            presenter = TMDBInitialScreenPresenter(webService: TMDBNetworkingService(),
+                                                       delegate: self)
+        }
+        presenter?.getInitialMovies()
+
         collectionView.backgroundColor = .white
         collectionView.register(TMDBInitialMoviesCell.self, forCellWithReuseIdentifier: movieCellId)
         collectionView.register(TMDBInitialScreenSectionHeaderTitle.self,

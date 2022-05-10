@@ -1,5 +1,5 @@
 //
-//  MockInitialScreenViewDelegate.swift
+//  MockTMDBInitialScreenViewDelegate.swift
 //  ExamTests
 //
 //  Created by Carlos Caraccia on 07/05/2022.
@@ -9,7 +9,7 @@ import Foundation
 import XCTest
 @testable import Exam
 
-class MockInitialScreenViewDelegate:TMDBInitialScreenViewDelegateProtocol {
+class MockTMDBInitialScreenViewDelegate:TMDBInitialScreenViewDelegateProtocol {
     
     var expectation:XCTestExpectation?
     

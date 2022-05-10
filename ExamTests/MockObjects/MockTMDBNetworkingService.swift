@@ -18,25 +18,18 @@ class MockTMDBNetworkingService:TMDBNetworkingServiceProtocol {
         
         isGetInitialMoviesCalled = true
 
-        let movie = Movie(id: 1,
-                          title: "a title",
-                          backdropPath: "back drop path",
-                          posterPath: "a poster path",
-                          overview: "an overview",
-                          voteAverage: 25.0,
-                          voteCount: 1,
-                          runtime: 1)
+        let dict = MockObjects.moviesDictionaryMock(with: 1)
         
-        let dict:[TMDBServiceEndPoints:[Movie]] = [.popular:[movie],
-                                                   .topRated:[movie],
-                                                   .upcoming:[movie]]
-            
-        let resutlt = Result<[TMDBServiceEndPoints : [Movie]], TMDBServiceError>.success(dict)
-        completion(resutlt)
+        completion(.success(dict))
     }
     
     func fetchMovie(id: Int, completion: @escaping (Result<Movie, TMDBServiceError>) -> Void) {
         isFetchMovieCalled = true
+        
+        let movie = MockObjects.movieMock(withId: 1)
+        
+        completion(.success(movie))
+
     }
     
     func searchMovie(query: String, completion: @escaping (Result<MovieApiResponse, TMDBServiceError>) -> Void) {
