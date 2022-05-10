@@ -7,13 +7,6 @@
 
 import UIKit
 
-protocol TMDBDetailedMovieScreenDelegateProtocol:AnyObject {
-    
-    func successfulGetMovieDetails(movie:Movie)
-    func errorHandler(error:TMDBServiceError)
-    
-}
-
 class TMDBDetailedMovieScreen: UIViewController  {
     
     weak var delegate:TMDBMainCoordinator?
@@ -28,6 +21,8 @@ class TMDBDetailedMovieScreen: UIViewController  {
             movieVotesLabel.text = "Votes \(movie!.voteAverage)"
         }
     }
+    
+    var presenter:TMDBDetailedMovieScreenPresenterProtocol?
         
     init(movieId:Int) {
         self.movieId = movieId
@@ -79,16 +74,16 @@ class TMDBDetailedMovieScreen: UIViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if presenter == nil {
+            presenter = TMDBDetailedMovieScreenPresenter(webService: TMDBNetworkingService(),
+                                                             delegate: self)
+        }
         view.backgroundColor = .white
+        presenter?.getMovieDetails(for: movieId)
         setupViews()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        let presenter = TMDBDetailedMovieScreenPresenter(webService: TMDBNetworkingService(),
-                                                         delegate: self)
-        presenter.getMovieDetails(for: movieId)
-    }
-    
+        
     func setupViews() {
         
         let stackView = UIStackView(arrangedSubviews: [movieImage,

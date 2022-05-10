@@ -7,13 +7,12 @@
 
 import UIKit
 
-
-class TMDBDetailedMovieScreenPresenter {
+class TMDBDetailedMovieScreenPresenter:TMDBDetailedMovieScreenPresenterProtocol {
     
     private var webService:TMDBNetworkingServiceProtocol
     private weak var delegate:TMDBDetailedMovieScreenDelegateProtocol?
     
-    init(webService:TMDBNetworkingServiceProtocol,
+    required init(webService:TMDBNetworkingServiceProtocol,
          delegate:TMDBDetailedMovieScreenDelegateProtocol) {
         self.webService = webService
         self.delegate = delegate
