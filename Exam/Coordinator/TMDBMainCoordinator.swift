@@ -19,8 +19,7 @@ class TMDBMainCoordinator:TMDBCoordinator  {
     }
     
     func start() {
-        let layout = UICollectionViewFlowLayout()
-        let initialViewController = TMDBInitialMoviesController(collectionViewLayout:layout)
+        let initialViewController = TMDBInitialMoviesController()
         initialViewController.delegate = self
         navigationController.pushViewController(initialViewController, animated: false)
     }
