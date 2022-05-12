@@ -8,7 +8,10 @@
 import Foundation
 import UIKit
 
-class TMDBInitialMoviesController:UICollectionViewController,
+let movieCellId = "movieCellId"
+let sectionHeaderId = "sectionHeaderId"
+
+class TMDBInitialMoviesController:UIViewController,
                                   UICollectionViewDelegateFlowLayout
 {
     weak var delegate:TMDBMainCoordinator?
@@ -18,57 +21,62 @@ class TMDBInitialMoviesController:UICollectionViewController,
     private let movieCellId = "movieCellId"
     private let sectionHeaderId = "sectionHeaderId"
     
-    private var moviesDictionary:[TMDBServiceEndPoints : [Movie]] = Dictionary() {
+    var dataSource:TMDBInitialMoviesDataSource? {
         didSet {
+            collectionView.dataSource = dataSource
             collectionView.reloadData()
         }
     }
     
+    var collectionView:UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .clear
+        return collectionView
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupViews()
+        configureCollectionView()
+        
         if presenter == nil {
             presenter = TMDBInitialScreenPresenter(webService: TMDBNetworkingService(),
-                                                       delegate: self)
+                                                   delegate: self)
         }
         presenter?.getInitialMovies()
-
+    }
+    
+    func configureCollectionView() {
+        
         collectionView.backgroundColor = .white
-        collectionView.register(TMDBInitialMoviesCell.self, forCellWithReuseIdentifier: movieCellId)
+        collectionView.register(TMDBInitialMoviesCell.self,
+                                forCellWithReuseIdentifier: movieCellId)
         collectionView.register(TMDBInitialScreenSectionHeaderTitle.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: sectionHeaderId)
+                
+        collectionView.dataSource = self.dataSource
+        collectionView.delegate = self
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: movieCellId, for: indexPath) as! TMDBInitialMoviesCell
-        let key = Array(moviesDictionary.keys)[indexPath.section]
-        let movies = moviesDictionary[key]
-        cell.movies = movies
-        cell.delegate = self
-        return cell
-    }
+    func setupViews() {
+    
+        self.view.addSubview(self.collectionView)
         
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        let keys = Array(moviesDictionary.keys)
-        return keys.count
-
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        NSLayoutConstraint.activate([
+            collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            collectionView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+        ])
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.view.frame.width, height: 250)
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let sectionHeaderTitle = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: sectionHeaderId, for: indexPath) as! TMDBInitialScreenSectionHeaderTitle
-        let keys = Array(moviesDictionary.keys)
-        sectionHeaderTitle.sectionTitleLabel.text = keys.count == 0 ? "Section title" :
-                                                                        keys[indexPath.section].description
-        return sectionHeaderTitle
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -79,7 +87,10 @@ class TMDBInitialMoviesController:UICollectionViewController,
 extension TMDBInitialMoviesController: TMDBInitialScreenViewDelegateProtocol {
     
     func successfulGetInitialMovies(moviesDictionary: [TMDBServiceEndPoints : [Movie]]) {
-        self.moviesDictionary = moviesDictionary
+        let datasoure = TMDBInitialMoviesDataSource()
+        datasoure.moviesDictionary = moviesDictionary
+        datasoure.delegate = self
+        self.dataSource = datasoure
     }
     
     func errorHandler(error: TMDBServiceError) {
@@ -87,10 +98,10 @@ extension TMDBInitialMoviesController: TMDBInitialScreenViewDelegateProtocol {
     }
 }
 
-extension TMDBInitialMoviesController:TMDBInitialMoviesCellProtocol {
-    
-    func navigateToDetailMovies(movie: Movie) {
+extension TMDBInitialMoviesController: TMDBInitialMoviesDataSourceDelegateProtocol {
+    func didSelectMovie(movie: Movie) {
         delegate?.showDetailedMovieScreen(with: movie)
     }
 }
+
 
