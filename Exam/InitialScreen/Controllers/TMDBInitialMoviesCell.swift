@@ -20,7 +20,6 @@ class TMDBInitialMoviesCell:UICollectionViewCell,
     
     private let movieCellIdentifier = "movieCell"
   
-    // the cell(view) should not handle the responsibility of naviagation or communicating with the coordinator, this should be done in the controller class
     weak var delegate:TMDBInitialMoviesCellProtocol?
     
     var movies:[Movie]? {

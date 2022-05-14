@@ -51,6 +51,7 @@
 		0EB24CFB2826BB6600BF60E6 /* TMDBInitialScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB24CFA2826BB6600BF60E6 /* TMDBInitialScreenPresenter.swift */; };
 		0EB24CFD2826C9A600BF60E6 /* MockTMDBInitialScreenViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB24CFC2826C9A600BF60E6 /* MockTMDBInitialScreenViewDelegate.swift */; };
 		0EB24CFF2826EAF200BF60E6 /* TMDBInitialScreenViewDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB24CFE2826EAF200BF60E6 /* TMDBInitialScreenViewDelegateProtocol.swift */; };
+		0EE09EF7282F1B7A009DBF99 /* TMDBInitialScreenCollectoinViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE09EF6282F1B7A009DBF99 /* TMDBInitialScreenCollectoinViewDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,7 @@
 		0EB24CFA2826BB6600BF60E6 /* TMDBInitialScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBInitialScreenPresenter.swift; sourceTree = "<group>"; };
 		0EB24CFC2826C9A600BF60E6 /* MockTMDBInitialScreenViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTMDBInitialScreenViewDelegate.swift; sourceTree = "<group>"; };
 		0EB24CFE2826EAF200BF60E6 /* TMDBInitialScreenViewDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBInitialScreenViewDelegateProtocol.swift; sourceTree = "<group>"; };
+		0EE09EF6282F1B7A009DBF99 /* TMDBInitialScreenCollectoinViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBInitialScreenCollectoinViewDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +193,7 @@
 				0E2449122827D58D006B0271 /* TMDBInitialMoviesController.swift */,
 				0E7AED5D282BB91100621DBD /* TMDBInitialMoviesDataSource.swift */,
 				0E2449142827EACD006B0271 /* TMDBInitialMoviesCell.swift */,
+				0EE09EF6282F1B7A009DBF99 /* TMDBInitialScreenCollectoinViewDelegate.swift */,
 				0EB24CFE2826EAF200BF60E6 /* TMDBInitialScreenViewDelegateProtocol.swift */,
 			);
 			path = Controllers;
@@ -491,6 +494,7 @@
 				0E0B1FE628294A600035B3F4 /* TMDBDetailedMovieScreenPresenter.swift in Sources */,
 				0EA32F1828251ABC00630B46 /* TMDBNetworkingServiceProtocol.swift in Sources */,
 				0E95BA2428229888002EF4CB /* Movie.swift in Sources */,
+				0EE09EF7282F1B7A009DBF99 /* TMDBInitialScreenCollectoinViewDelegate.swift in Sources */,
 				0E23CB212829D26F00FA2390 /* TMDBInitialScreenPresenterProtocol.swift in Sources */,
 				0EB24CFB2826BB6600BF60E6 /* TMDBInitialScreenPresenter.swift in Sources */,
 			);
