@@ -8,23 +8,23 @@
 import Foundation
 import UIKit
 
-let movieCellId = "movieCellId"
-let sectionHeaderId = "sectionHeaderId"
-
-class TMDBInitialMoviesController:UIViewController,
-                                  UICollectionViewDelegateFlowLayout
+class TMDBInitialMoviesController:UIViewController
+                                  
 {
     weak var delegate:TMDBMainCoordinator?
     
     var presenter:TMDBInitialScreenPresenterProtocol?
         
-    private let movieCellId = "movieCellId"
-    private let sectionHeaderId = "sectionHeaderId"
-    
     var dataSource:TMDBInitialMoviesDataSource? {
         didSet {
             collectionView.dataSource = dataSource
             collectionView.reloadData()
+        }
+    }
+    
+    var collectionViewDelegate:TMDBInitialScreenCollectoinViewDelegate? {
+        didSet {
+            collectionView.delegate = collectionViewDelegate
         }
     }
     
@@ -60,7 +60,7 @@ class TMDBInitialMoviesController:UIViewController,
                                 withReuseIdentifier: sectionHeaderId)
                 
         collectionView.dataSource = self.dataSource
-        collectionView.delegate = self
+        collectionView.delegate = self.collectionViewDelegate
     }
     
     func setupViews() {
@@ -74,23 +74,18 @@ class TMDBInitialMoviesController:UIViewController,
             collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
         ])
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.width, height: 250)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 40)
-    }
 }
 
 extension TMDBInitialMoviesController: TMDBInitialScreenViewDelegateProtocol {
     
     func successfulGetInitialMovies(moviesDictionary: [TMDBServiceEndPoints : [Movie]]) {
+        
         let datasoure = TMDBInitialMoviesDataSource()
         datasoure.moviesDictionary = moviesDictionary
         datasoure.delegate = self
         self.dataSource = datasoure
+        
+        self.collectionViewDelegate = TMDBInitialScreenCollectoinViewDelegate()
     }
     
     func errorHandler(error: TMDBServiceError) {

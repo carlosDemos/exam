@@ -40,26 +40,21 @@ class TMDBInitialScreenDataSourceTests: XCTestCase {
         XCTAssertEqual(collectionView.numberOfItems(inSection: 0), 1)
     }
     
-    func test_InititalScreenDataSource_WhenLoadedWithData_ItemInSectionShouldBeOfSpecificType() {
+    func test_InititalScreenDataSource_WhenLoadedWithData_ItemAndSupplementaryViewInSectionShouldBeOfSpecificType() {
         
         let mockDictionaryWithMovies = MockObjects.moviesDictionaryMock(with: 1)
         sut.moviesDictionary = mockDictionaryWithMovies
         collectionView.register(TMDBInitialMoviesCell.self, forCellWithReuseIdentifier: "movieCellId")
-        var isCellOfSpecificType = false
-        
+        collectionView.register(TMDBInitialScreenSectionHeaderTitle.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: "sectionHeaderId")
+                
         collectionView.reloadData()
-        let cell  = collectionView.dataSource?.collectionView(collectionView, cellForItemAt: IndexPath(item: 0, section: 0))
+        let cell  = collectionView.dataSource?.collectionView(collectionView, cellForItemAt: IndexPath(item: 0, section: 0)) as? TMDBInitialMoviesCell
+        let suplementaryView  = collectionView.dataSource?.collectionView?(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: 0)) as? TMDBInitialScreenSectionHeaderTitle
         
-        if let _ = cell as? TMDBInitialMoviesCell {
-            isCellOfSpecificType = true
-        }
-        
-        XCTAssertTrue(isCellOfSpecificType)
-    }
-    
-    
-    
-    
+        XCTAssertNotNil(cell)
+        XCTAssertNotNil(suplementaryView)
 
-    
+    }
 }

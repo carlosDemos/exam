@@ -16,7 +16,6 @@ class TMDBNetworkingServiceTests: XCTestCase {
     var initiallyFetchedMoviesData:Data!
 
     override func setUp() {
-        
         let urlSessionConfiguration = URLSessionConfiguration.ephemeral
         urlSessionConfiguration.protocolClasses = [MockURLProtocol.self]
         let session = URLSession(configuration: urlSessionConfiguration)
@@ -33,16 +32,13 @@ class TMDBNetworkingServiceTests: XCTestCase {
     }
         
     override func tearDown() {
-        
         sut = nil
         movieFetchedData = nil
         searchedMoviesData = nil
         initiallyFetchedMoviesData = nil
-        
     }
     
     func testTMDBfetchMovie_whenGivenInvalidData_shouldReturnError() {
-        
         let stubResponse = HTTPURLResponse(url: URL(string: "aaa")!, statusCode: 210, httpVersion: nil, headerFields: nil)
         let corruptedData = "{\"path\" : \"incorrect\"}".data(using: .utf8)
         MockURLProtocol.stubResponseData = corruptedData
@@ -98,7 +94,6 @@ class TMDBNetworkingServiceTests: XCTestCase {
                 XCTAssertNil(error)
             }
         }
-        
         self.wait(for: [expectation], timeout: 0.1)
     }
 }

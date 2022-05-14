@@ -13,9 +13,11 @@ protocol TMDBInitialMoviesDataSourceDelegateProtocol:AnyObject {
     func didSelectMovie(movie:Movie)
 }
 
+let movieCellId = "movieCellId"
+let sectionHeaderId = "sectionHeaderId"
+
 class TMDBInitialMoviesDataSource: NSObject, UICollectionViewDataSource {
     
-    //TODO: Create a new delegate method and removed this delegate away from this class, the data source should not be responsible for handling navigation.
     weak var delegate:TMDBInitialMoviesDataSourceDelegateProtocol?
     
     var moviesDictionary:[TMDBServiceEndPoints:[Movie]]?
@@ -50,7 +52,6 @@ class TMDBInitialMoviesDataSource: NSObject, UICollectionViewDataSource {
         }
         return cell
     }
-
 }
 
 extension TMDBInitialMoviesDataSource:TMDBInitialMoviesCellProtocol {
