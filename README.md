@@ -10,7 +10,7 @@
    - Las restantes unit tests para las demas clases y presenters (solo testee 3), puedo testear todo pero no de inmediato.
    - Algunas integration tests para corroborar el correcto funcionamiento del producto.
 
-Despues de mayo 26 la CI va a empezar a fallar porque github hace un update del xcode que tiene instalado a la version 13.3
+Despues de mayo 13 la CI puede empezar a fallar porque github hace un update del xcode que tiene instalado a la version 13.3
 
 ## Preguntas
 
@@ -36,8 +36,8 @@ Navegacion, Networking, Business logic, View, etc.
 
 ### Qué características tiene, según su opinión, un “buen” código o código limpio
  
- El codigo limpio debe estar testeado, y estar dividido en sus responsabilidades.
- Cada clase debe cumplir con una funcion y la misma debe estar testeada.
- El mismo debe ser claro y legible, no me gusta agregar comentarios en el codigo, y el mismo debe ser explicativo.
- 
- 
+ El codigo debe estar dividido en responsabilidades, es clave aplicar el principio de responsabilidad unica para que el codigo sea bueno y limbio.
+ No debe ejecutar muchas funciones a la vez.
+ Cada clase debe cumplir una sola funcion.
+ El codigo debe ser testeable esto se logra solamente dividiendo el codigo en porciones menores.
+ Debe ser explicativo por si solo no debe contener un monton de explicatoines para entender lo que hace.
