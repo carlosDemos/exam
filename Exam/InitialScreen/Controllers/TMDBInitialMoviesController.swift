@@ -11,7 +11,7 @@ import UIKit
 class TMDBInitialMoviesController:UIViewController
                                   
 {
-    weak var delegate:TMDBMainCoordinator?
+    weak var delegate:TMDBInitialScreenCoordinator?
     
     var presenter:TMDBInitialScreenPresenterProtocol?
         

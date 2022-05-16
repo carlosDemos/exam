@@ -9,7 +9,7 @@ import UIKit
 
 class TMDBDetailedMovieScreen: UIViewController  {
     
-    weak var delegate:TMDBMainCoordinator?
+    weak var delegate:TMDBInitialScreenCoordinator?
     
     private var movieId:Int
     

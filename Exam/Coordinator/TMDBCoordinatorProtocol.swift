@@ -1,5 +1,5 @@
 //
-//  TMDBCoordinator.swift
+//  TMDBCoordinatorProtocol.swift
 //  Exam
 //
 //  Created by Carlos Caraccia on 08/05/2022.
@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-protocol TMDBCoordinator {
+protocol TMDBCoordinatorProtocol {
     
-    var childCoordinators:[TMDBCoordinator] { get set }
+    var childCoordinators:[TMDBCoordinatorProtocol] { get set }
     var navigationController:UINavigationController { get set }
     
     func start()
