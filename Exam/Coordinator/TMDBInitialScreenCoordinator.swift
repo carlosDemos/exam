@@ -1,5 +1,5 @@
 //
-//  TMDBMainCoordinator.swift
+//  TMDBInitialScreenCoordinator.swift
 //  Exam
 //
 //  Created by Carlos Caraccia on 08/05/2022.
@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-class TMDBMainCoordinator:TMDBCoordinator  {
+class TMDBInitialScreenCoordinator:TMDBCoordinatorProtocol  {
     
-    var childCoordinators: [TMDBCoordinator] = [TMDBCoordinator]()
+    var childCoordinators: [TMDBCoordinatorProtocol] = [TMDBCoordinatorProtocol]()
     
     var navigationController: UINavigationController
     
@@ -20,6 +20,7 @@ class TMDBMainCoordinator:TMDBCoordinator  {
     
     func start() {
         let initialViewController = TMDBInitialMoviesController()
+        initialViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .featured, tag: 0)
         initialViewController.delegate = self
         navigationController.pushViewController(initialViewController, animated: false)
     }

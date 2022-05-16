@@ -15,7 +15,6 @@ class TMDBMovieCell:UICollectionViewCell {
             if let movieImageUrl = movie?.posterPathURL {
                 movieImage.loadImage(with: movieImageUrl)
             }
-            // TODO: add an alternative case in here to show a gray image
         }
     }
     
