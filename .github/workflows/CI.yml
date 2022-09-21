@@ -26,4 +26,4 @@ jobs:
       - name: Show availlable destinations
         run:  xcodebuild -project Exam.xcodeproj -scheme Exam -showdestinations
       - name: Clean Build and Test
-        run:  xcodebuild clean test -project Exam.xcodeproj -scheme Exam -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' -enableCodeCoverage YES | xcpretty && exit ${PIPESTATUS[0]}
+        run:  xcodebuild clean test -project Exam.xcodeproj -scheme Exam -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' -enableCodeCoverage YES && exit ${PIPESTATUS[0]}
